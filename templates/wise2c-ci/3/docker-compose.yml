@@ -47,7 +47,7 @@ document:
   labels:
     io.rancher.container.pull_image: always
   tty: true
-  image: registry.aliyuncs.com/wise2c/document:0.2-beta
+  image: registry.aliyuncs.com/wise2c/document:0.2.5-beta
   stdin_open: true
 
 mysql-server:
