@@ -1,12 +1,12 @@
 wise2build-frontend:
-  image: registry.aliyuncs.com/wise2c/wisebuild-fronted:1.0.1
+  image: registry.aliyuncs.com/wise2c/wisebuild-fronted:1.0.6
   stdin_open: true
   tty: true
   labels:
     io.rancher.container.pull_image: always
 
 wise2build-biz:
-  image: registry.aliyuncs.com/wise2c/build-biz:1.0.1
+  image: registry.aliyuncs.com/wise2c/build-biz:1.0.6
   volumes:
     - /var/run/docker.sock:/var/run/docker.sock
   labels:
@@ -20,7 +20,7 @@ wise2build-biz:
   stdin_open: true
 
 wise2build-worker:
-  image: registry.aliyuncs.com/wise2c/build-worker:1.0.1
+  image: registry.aliyuncs.com/wise2c/build-worker:1.0.6
   stdin_open: true
   tty: true
   links:
@@ -47,7 +47,7 @@ document:
   labels:
     io.rancher.container.pull_image: always
   tty: true
-  image: registry.aliyuncs.com/wise2c/document:1.0.1
+  image: registry.aliyuncs.com/wise2c/document:1.0.6
   stdin_open: true
 
 mysql-server:
