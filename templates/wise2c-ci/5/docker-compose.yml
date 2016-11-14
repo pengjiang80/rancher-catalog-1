@@ -4,6 +4,7 @@ wise2build-frontend:
   tty: true
   labels:
     io.rancher.container.pull_image: always
+    io.rancher.scheduler.affinity:host_label: wise2biz=${biz_host_label}
 
 wise2build-biz:
   image: registry.aliyuncs.com/wise2c/build-biz:1.0.6
@@ -11,6 +12,7 @@ wise2build-biz:
     - /var/run/docker.sock:/var/run/docker.sock
   labels:
     io.rancher.container.pull_image: always
+    io.rancher.scheduler.affinity:host_label: wise2biz=${biz_host_label}
   links:
     - eureka-server
     - mysql-server
@@ -42,10 +44,13 @@ eureka-server:
     - 8500:8500
     - 8600:53/udp
   command: agent -server -client=0.0.0.0 -dev -node=node0 -bootstrap-expect=1 -data-dir=/tmp/consul
+  labels:
+    io.rancher.scheduler.affinity:host_label: wise2biz=${biz_host_label}
 
 document:
   labels:
     io.rancher.container.pull_image: always
+    io.rancher.scheduler.affinity:host_label: wise2biz=${biz_host_label}
   tty: true
   image: registry.aliyuncs.com/wise2c/document:1.0.6
   stdin_open: true
@@ -60,6 +65,8 @@ mysql-server:
   tty: true
   stdin_open: true
   command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+  labels:
+    io.rancher.scheduler.affinity:host_label: wise2biz=${biz_host_label}
 
 mysql-server2:
   image: mysql:5.5
@@ -71,15 +78,21 @@ mysql-server2:
   tty: true
   stdin_open: true
   command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+  labels:
+    io.rancher.scheduler.affinity:host_label: wise2biz=${biz_host_label}
 
 rabbitmq:
   image: rabbitmq:3-management
   environment:
     - RABBITMQ_DEFAULT_USER=wise2c
     - RABBITMQ_DEFAULT_PASS=wise2c
+  labels:
+    io.rancher.scheduler.affinity:host_label: wise2biz=${biz_host_label}
 
 redis:
   image: redis:3.2
+  lables:
+    io.rancher.scheduler.affinity:host_label: wise2biz=${biz_host_label}
 
 postgres-server:
   environment:
@@ -88,6 +101,8 @@ postgres-server:
   tty: true
   image: postgres:9
   stdin_open: true
+  lables:
+    io.rancher.scheduler.affinity:host_label: wise2biz=${biz_host_label}
 
 sonarqube:
   environment:
